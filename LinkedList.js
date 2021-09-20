@@ -7,9 +7,13 @@ class Node {
 }
 
 export default class LinkedList {
-	constructor() {
+	constructor(value = null) {
 		this.head = null;
 		this.tail = null;
+		if (value) {
+			this.prepend(value);
+			return;
+		}
 	}
 	get length() {
 		let trav = this.head;
@@ -23,18 +27,18 @@ export default class LinkedList {
 	isEmpty() {
 		return this.length == 0;
 	}
-	indexOf(number) {
+	indexOf(element) {
 		let trav = this.head;
 		let index = 0;
-		while (trav.value != number && trav) {
+		while (trav.value != element && trav) {
 			index++;
 			trav = trav.next;
 		}
 		if (!trav) return -1;
 		return index;
 	}
-	contains(number) {
-		return this.indexOf(number) != -1;
+	contains(element) {
+		return this.indexOf(element) != -1;
 	}
 	prepend(value) {
 		const newNode = new Node(value, this.head, null);
@@ -123,8 +127,8 @@ export default class LinkedList {
 		trav = null;
 		return deletedValue;
 	}
-	remove(number) {
-		const index = this.indexOf(number);
+	remove(element) {
+		const index = this.indexOf(element);
 		if (index == -1) {
 			return -1;
 		}
