@@ -6,7 +6,7 @@ class Node {
 	}
 }
 
-class LinkedList {
+export default class LinkedList {
 	constructor() {
 		this.head = null;
 		this.tail = null;
@@ -19,6 +19,22 @@ class LinkedList {
 			trav = trav.next;
 		}
 		return length;
+	}
+	isEmpty() {
+		return this.length == 0;
+	}
+	indexOf(number) {
+		let trav = this.head;
+		let index = 0;
+		while (trav.value != number && trav) {
+			index++;
+			trav = trav.next;
+		}
+		if (!trav) return -1;
+		return index;
+	}
+	contains(number) {
+		return this.indexOf(number) != -1;
 	}
 	prepend(value) {
 		const newNode = new Node(value, this.head, null);
@@ -87,22 +103,13 @@ class LinkedList {
 		this.tail.next = null;
 		return deletedValue;
 	}
-	indexOf(number) {
-		let trav = this.head;
-		let index = 0;
-		while (trav.value != number && trav) {
-			index++;
-			trav = trav.next;
-		}
-		if (!trav) return -1;
-		return index;
-	}
-	delete(index) {
+
+	removeAt(index) {
 		if (index == 0) {
-			return shift();
+			return this.shift();
 		}
 		if (index == this.length - 1) {
-			return pop();
+			return this.pop();
 		}
 		let trav = this.head;
 		while (index--) {
@@ -115,6 +122,14 @@ class LinkedList {
 		trav.next = null;
 		trav = null;
 		return deletedValue;
+	}
+	remove(number) {
+		const index = this.indexOf(number);
+		if (index == -1) {
+			return -1;
+		}
+
+		return this.removeAt(index);
 	}
 	[Symbol.iterator]() {
 		let trav = this.head;
@@ -136,14 +151,21 @@ class LinkedList {
 			},
 		};
 	}
+	toString() {
+		let result = "";
+		let trav = this.head;
+		while (trav !== null) {
+			result += `${trav.value} -> `;
+			trav = trav.next;
+		}
+
+		result += "null\n";
+		return result;
+	}
 }
 const list = new LinkedList();
 list.append(1);
 list.append(2);
 list.append(3);
-list.add(15, 1);
-list.delete(1);
-
-for (let number of list) {
-	console.log(number);
-}
+list.remove(3);
+list.display();
