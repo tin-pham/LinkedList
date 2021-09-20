@@ -89,14 +89,14 @@ export default class LinkedList {
 
 		process.stdout.write("null\n");
 	}
-	shift() {
+	removeFirst() {
 		const deletedValue = this.head.value;
 		this.head = this.head.next;
 		this.head.prev.next = null;
 		this.head.prev = null;
 		return deletedValue;
 	}
-	pop() {
+	removeLast() {
 		const deletedValue = this.tail.value;
 		this.tail = this.tail.prev;
 		this.tail.next.prev = null;
@@ -106,10 +106,10 @@ export default class LinkedList {
 
 	removeAt(index) {
 		if (index == 0) {
-			return this.shift();
+			return this.removeFirst();
 		}
 		if (index == this.length - 1) {
-			return this.pop();
+			return this.removeLast();
 		}
 		let trav = this.head;
 		while (index--) {
@@ -163,9 +163,3 @@ export default class LinkedList {
 		return result;
 	}
 }
-const list = new LinkedList();
-list.append(1);
-list.append(2);
-list.append(3);
-list.remove(3);
-list.display();

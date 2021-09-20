@@ -32,7 +32,6 @@ list.display();
 
 ## Method
 
-I use the term "pop, shift" to make these method familiar to you
 
 **Add**
 
@@ -42,8 +41,8 @@ I use the term "pop, shift" to make these method familiar to you
 
 **Remove**
 
--   shift(): Remove the first element, return it
--   pop(): Remove the last element, return it
+-   removeFirst(): Remove the first element, return it
+-   removeLast(): Remove the last element, return it
 -   removeAt(index): Remove the element at specific index
 -   remove(element): Remove the specific element
 
