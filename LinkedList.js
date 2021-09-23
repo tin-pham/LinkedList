@@ -37,6 +37,17 @@ export default class LinkedList {
 		if (!trav) return -1;
 		return index;
 	}
+	indexOfObjectBaseOnId(id) {
+		let trav = this.head;
+		let index = 0;
+		while (trav.value.id != id && trav) {
+			index++;
+			trav = trav.next;
+		}
+
+		if (!trav) return -1;
+		return index;
+	}
 	contains(element) {
 		return this.indexOf(element) != -1;
 	}
@@ -95,6 +106,11 @@ export default class LinkedList {
 	}
 	removeFirst() {
 		const deletedValue = this.head.value;
+		if (this.length == 1) {
+			this.head = null;
+			this.tail = null;
+			return deletedValue;
+		}
 		this.head = this.head.next;
 		this.head.prev.next = null;
 		this.head.prev = null;
